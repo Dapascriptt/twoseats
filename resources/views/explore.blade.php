@@ -17,7 +17,7 @@
         </p>
         <h1 class="font-serif text-5xl md:text-6xl font-medium text-gray-900 mb-2">Explore</h1>
         <p class="text-gray-400 font-serif italic text-sm mb-10">
-            {{ $visits->count() }} tempat yang pernah dikunjungi.
+            {{ $visits->count() }} tempat yang Marva mau datangin.
         </p>
 
         <form method="GET" action="{{ route('explore') }}">
