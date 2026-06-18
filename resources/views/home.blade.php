@@ -43,7 +43,7 @@
                     </svg>
                 </a>
                 @if($totalCount > 0)
-                <span class="text-sm text-gray-400">{{ $totalCount }} tempat dikunjungi</span>
+                <span class="text-sm text-gray-400">{{ $totalCount }} sudah marva datagin ^-^</span>
                 @endif
             </div>
 

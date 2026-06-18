@@ -4,20 +4,24 @@
 
 @section('content')
 
-{{-- tsParticles floating emoji background --}}
-<div id="ts-bg" class="fixed inset-0 pointer-events-none z-0"></div>
+<div class="relative overflow-hidden">
 
-<div class="relative z-10">
+    {{-- Dot grid --}}
+    <div class="absolute inset-0 pointer-events-none" style="background-image: radial-gradient(circle, #61876422 1.2px, transparent 1.2px); background-size: 28px 28px;"></div>
+
+    {{-- Ambient blobs --}}
+    <div class="absolute w-96 h-96 rounded-full bg-primary pointer-events-none" style="top:-6%;right:-4%;opacity:0.04;filter:blur(80px);"></div>
+    <div class="absolute w-72 h-72 rounded-full bg-amber-300 pointer-events-none" style="bottom:20%;left:-3%;opacity:0.06;filter:blur(60px);"></div>
 
 {{-- ===== HEADER ===== --}}
-<section class="max-w-7xl mx-auto px-6 pt-16 pb-12">
+<section class="max-w-7xl mx-auto px-6 pt-16 pb-12 relative">
     <div id="explore-head">
         <p class="text-xs font-medium tracking-[0.22em] text-primary uppercase mb-3 flex items-center gap-2">
             <span class="block w-5 h-px bg-primary"></span>Sudah kemana aja ?
         </p>
         <h1 class="font-serif text-5xl md:text-6xl font-medium text-gray-900 mb-2">Explore</h1>
         <p class="text-gray-400 font-serif italic text-sm mb-10">
-            {{ $visits->count() }} tempat yang Marva mau datangin.
+            {{ $visits->count() }} tempat yang Marva udah datangin sesuai BM nya.
         </p>
 
         <form method="GET" action="{{ route('explore') }}">
@@ -122,64 +126,13 @@
     @endif
 </section>
 
-</div>{{-- end z-10 --}}
+</div>{{-- end texture wrapper --}}
 
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
 <script>
-/* ============================================================
-   tsParticles — floating emoji in background
-============================================================ */
-(async () => {
-    await tsParticles.load("ts-bg", {
-        background: { color: { value: "transparent" } },
-        fpsLimit: 45,
-        particles: {
-            number: { value: 20, density: { enable: true, area: 900 } },
-            shape: {
-                type: "character",
-                options: {
-                    character: {
-                        value: ["☕", "📍", "📸", "✨", "🌿", "📖", "🎞", "🗺"],
-                        font:   "Arial",
-                        weight: "400",
-                        fill:   true
-                    }
-                }
-            },
-            opacity: { value: { min: 0.12, max: 0.35 } },
-            size:    { value: { min: 14,   max: 26    } },
-            move: {
-                enable:   true,
-                speed:    0.6,
-                direction: "none",
-                outModes: { default: "bounce" },
-                random:   true,
-                straight: false
-            },
-            rotate: {
-                value:     { min: 0, max: 360 },
-                direction: "random",
-                animation: { enable: true, speed: 5, sync: false }
-            }
-        },
-        interactivity: {
-            detectsOn: "window",
-            events: {
-                onHover: { enable: true, mode: "bubble" },
-                onClick: { enable: true, mode: "push"   }
-            },
-            modes: {
-                bubble: { distance: 180, size: 34, duration: 0.5, opacity: 0.7 },
-                push:   { quantity: 4 }
-            }
-        }
-    });
-})();
-
 /* ============================================================
    Header entrance
 ============================================================ */

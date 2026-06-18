@@ -4,16 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'TwoSeats') — A quiet place where we keep our stories.</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        #main-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        #main-nav.nav-scrolled {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgb(243 244 246);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+        #nav-inner {
+            transition: padding 0.4s ease;
+        }
+        #main-nav.nav-scrolled #nav-inner {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+    </style>
 </head>
 <body class="font-sans bg-white text-gray-800 antialiased" style="cursor:none;">
 
-    <header class="border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <header id="main-nav">
+        <div id="nav-inner" class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <a href="{{ route('home') }}" class="font-serif text-xl font-medium text-primary tracking-tight">
                 TwoSeats
             </a>
@@ -41,6 +67,18 @@
     </footer>
 
     @stack('scripts')
+
+    {{-- Navbar scroll effect --}}
+    <script>
+    (function () {
+        var nav = document.getElementById('main-nav');
+        function onScroll() {
+            nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    })();
+    </script>
 
     {{-- Global coffee-bean cursor trail --}}
     <canvas id="g-cursor" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;" aria-hidden="true"></canvas>
